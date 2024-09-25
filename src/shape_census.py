@@ -1,4 +1,22 @@
 def count_connected_shapes(grid):
+    """
+    Count the number of connected shapes in a binary grid.
+
+    A shape is defined as a group of adjacent '1's connected horizontally or vertically.
+    Diagonal connections are not considered.
+
+    Args:
+    grid (List[str]): A 2D grid represented as a list of strings, where each string is a row
+                      of '0's and '1's.
+
+    Returns:
+    int: The number of distinct connected shapes in the grid.
+
+    Example:
+    >>> grid = ['110', '010', '011']
+    >>> count_connected_shapes(grid)
+    2
+    """
     if not grid or not grid[0]:
         return 0
 
