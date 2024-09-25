@@ -24,7 +24,9 @@ shape-census/
 │   ├── data_small.txt
 │   ├── data_large.txt
 ├── src/
+│   ├── __init__.py
 │   ├── file_reader.py
+│   ├── main.py
 │   ├── shape_census.py
 ├── README.md
 ```

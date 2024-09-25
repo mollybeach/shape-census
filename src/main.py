@@ -1,5 +1,5 @@
-from shape_census import count_connected_shapes
-from file_reader import read_grid_from_file
+from .shape_census import count_connected_shapes
+from .file_reader import read_grid_from_file
 
 def process_file(filename):
     """
