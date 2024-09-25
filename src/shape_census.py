@@ -1,3 +1,5 @@
+import os
+
 def count_connected_shapes(grid):
     """
     Count the number of connected shapes in a binary grid.
@@ -41,22 +43,38 @@ def count_connected_shapes(grid):
     return shape_count
 
 def process_file(filename):
-    """
-    Read a grid from a file and count the connected shapes.
-
-    Args:
-    filename (str): The name of the file to process.
-
-    Returns:
-    int: The number of connected shapes in the grid.
-
-    Raises:
-    FileNotFoundError: If the specified file is not found.
-    """
     try:
-        with open(filename, 'r') as file:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(script_dir, '..', 'data', filename)
+        print(f"Attempting to open file: {file_path}")
+        
+        with open(file_path, 'r') as file:
             grid = [line.strip() for line in file]
-        return count_connected_shapes(grid)
+        
+        shape_count = count_connected_shapes(grid)
+        print(f"Processed {filename}: Found {shape_count} shapes")
+        return shape_count
     except FileNotFoundError:
         print(f"Error: File '{filename}' not found.")
         return None
+    except Exception as e:
+        print(f"An error occurred while processing {filename}: {str(e)}")
+        return None
+
+if __name__ == "__main__":
+    print("Script is running...")
+    small_file = 'data_small.txt'
+    large_file = 'data_large.txt'
+
+    print(f"Processing {small_file}...")
+    small_shapes = process_file(small_file)
+    
+    print(f"Processing {large_file}...")
+    large_shapes = process_file(large_file)
+
+    if small_shapes is not None:
+        print(f"Number of connected shapes in {small_file}: {small_shapes}")
+    if large_shapes is not None:
+        print(f"Number of connected shapes in {large_file}: {large_shapes}")
+
+    print("Script execution completed.")
