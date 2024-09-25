@@ -39,3 +39,24 @@ def count_connected_shapes(grid):
                 shape_count += 1
 
     return shape_count
+
+def process_file(filename):
+    """
+    Read a grid from a file and count the connected shapes.
+
+    Args:
+    filename (str): The name of the file to process.
+
+    Returns:
+    int: The number of connected shapes in the grid.
+
+    Raises:
+    FileNotFoundError: If the specified file is not found.
+    """
+    try:
+        with open(filename, 'r') as file:
+            grid = [line.strip() for line in file]
+        return count_connected_shapes(grid)
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found.")
+        return None
