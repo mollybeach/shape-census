@@ -1,4 +1,4 @@
-import os
+from file_reader import read_grid_from_file
 
 def count_connected_shapes(grid):
     """
@@ -13,11 +13,6 @@ def count_connected_shapes(grid):
 
     Returns:
     int: The number of distinct connected shapes in the grid.
-
-    Example:
-    >>> grid = ['110', '010', '011']
-    >>> count_connected_shapes(grid)
-    2
     """
     if not grid or not grid[0]:
         return 0
@@ -43,23 +38,21 @@ def count_connected_shapes(grid):
     return shape_count
 
 def process_file(filename):
-    try:
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(script_dir, '..', 'data', filename)
-        print(f"Attempting to open file: {file_path}")
-        
-        with open(file_path, 'r') as file:
-            grid = [line.strip() for line in file]
-        
+    """
+    Process a file containing a grid and count the connected shapes.
+
+    Args:
+    filename (str): The name of the file to process.
+
+    Returns:
+    int: The number of connected shapes in the grid, or None if an error occurred.
+    """
+    grid = read_grid_from_file(filename)
+    if grid is not None:
         shape_count = count_connected_shapes(grid)
         print(f"Processed {filename}: Found {shape_count} shapes")
         return shape_count
-    except FileNotFoundError:
-        print(f"Error: File '{filename}' not found.")
-        return None
-    except Exception as e:
-        print(f"An error occurred while processing {filename}: {str(e)}")
-        return None
+    return None
 
 if __name__ == "__main__":
     print("Script is running...")
